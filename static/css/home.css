@@ -1,0 +1,247 @@
+.home-page {
+    position: relative;
+    display: grid;
+    min-height: max(calc(100vh - 4rem), 640px);
+    place-items: center;
+    overflow: visible;
+    padding: 3rem var(--gutter) 6.5rem;
+}
+
+/* Faint oversized monogram behind the spread */
+.home-page::before {
+    content: "ELI";
+    position: absolute;
+    /* Right side, behind the ID card and its lace; level with the headline */
+    top: 4.5rem;
+    right: 6%; /* room for the italic slant so the "I" isn't cut off */
+    z-index: 0;
+    color: transparent;
+    font-family: var(--font-display);
+    font-size: clamp(8rem, 26vw, 24rem);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    font-style: italic;
+    font-weight: 900;
+    line-height: 0.8;
+    -webkit-text-stroke: 1.5px var(--rule);
+    pointer-events: none;
+}
+
+.home-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(100%, var(--page-max));
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+}
+
+.home-intro-content {
+    width: 100%;
+}
+
+.home-kicker {
+    margin-bottom: 1.8rem;
+}
+
+.home-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.6rem;
+    color: var(--text-dark);
+    font-size: clamp(3.4rem, 8.4vw, 8rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+}
+
+.home-title-line {
+    display: block;
+    animation: rise-in 1.2s var(--ease-soft) both;
+}
+
+.home-title-line + .home-title-line {
+    animation-delay: 0.15s;
+}
+
+.hello-script {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.hello-name {
+    color: var(--primary-blue);
+    font-style: italic;
+    font-size: 1.25em;
+}
+
+.hello-name .star {
+    font-size: 0.32em;
+    vertical-align: top;
+}
+
+.home-intro-subtitle {
+    margin-bottom: 1.4rem;
+    color: var(--text-dark);
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 500;
+}
+
+.home-intro-subtitle em {
+    color: var(--primary-blue);
+}
+
+.home-intro-copy {
+    max-width: 34rem;
+    color: var(--text-medium);
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    line-height: 1.8;
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.home-stats {
+    display: grid;
+    max-width: 34rem;
+    margin-top: 2.6rem;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--rule);
+}
+
+.home-stats div {
+    padding: 1rem 0.9rem 0;
+    border-left: 1px solid var(--rule);
+}
+
+.home-stats div:first-child {
+    padding-left: 0;
+    border-left: 0;
+}
+
+.home-stats dt {
+    color: var(--text-light);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.home-stats dd {
+    color: var(--text-dark);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.home-stats sup {
+    color: var(--primary-blue);
+    font-size: 0.45em;
+    font-style: italic;
+}
+
+.home-badge {
+    position: absolute;
+    right: clamp(1rem, 30vw, 28rem);
+    bottom: 7.5rem;
+    /* Sits behind the swinging ID card so it never covers the photo */
+    z-index: 0;
+}
+
+.home-caption {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 7rem;
+    /* Behind the swinging ID card, like the badge */
+    z-index: 0;
+    color: var(--text-light);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+}
+
+.home-caption em {
+    color: var(--primary-blue);
+    font-family: var(--font-display);
+    font-size: 1rem;
+}
+
+.lanyard-container {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 900px;
+    pointer-events: none;
+    touch-action: none;
+}
+
+#lanyard-root {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(0.4em); }
+}
+
+@media (max-width: 1100px) {
+    .home-badge {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .home-page {
+        min-height: max(calc(100svh - 3.6rem), 620px);
+        padding: 2.5rem 1.25rem 6rem;
+    }
+
+    .home-content {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr);
+        gap: 0.5rem;
+    }
+
+    .home-kicker {
+        margin-bottom: 1rem;
+        font-size: 0.6rem;
+    }
+
+    .home-title {
+        font-size: clamp(2.6rem, 11vw, 4rem);
+    }
+
+    .home-intro-subtitle {
+        font-size: 1rem;
+    }
+
+    .home-intro-copy {
+        font-size: 0.85rem;
+        line-height: 1.65;
+    }
+
+    .home-actions .btn {
+        padding: 0.7rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .home-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-stats div:nth-child(3) {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .home-caption {
+        display: none;
+    }
+}

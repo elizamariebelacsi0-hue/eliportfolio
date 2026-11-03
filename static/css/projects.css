@@ -1,0 +1,828 @@
+.projects-page {
+    overflow: hidden;
+}
+
+/* ================= Sliding cards ================= */
+
+.projects-marquee {
+    --card-width: min(80vw, 360px);
+    --card-gap: 1.75rem;
+    --marquee-duration: 24s;
+    position: relative;
+    padding: 0.5rem 0 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.projects-marquee::-webkit-scrollbar {
+    display: none;
+}
+
+.projects-track {
+    display: flex;
+    width: max-content;
+}
+
+.projects-set {
+    display: flex;
+    gap: var(--card-gap);
+    padding-right: var(--card-gap);
+}
+
+.projects-marquee:not(.is-running) .projects-set {
+    padding-left: var(--gutter);
+}
+
+.projects-marquee.is-running {
+    overflow: hidden;
+}
+
+.projects-marquee.is-running .projects-track {
+    animation: projects-scroll var(--marquee-duration) linear infinite;
+}
+
+.projects-marquee.is-running:hover .projects-track,
+.projects-marquee.is-running:focus-within .projects-track,
+.projects-marquee.is-paused .projects-track {
+    animation-play-state: paused;
+}
+
+@keyframes projects-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.project-card {
+    position: relative;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    width: var(--card-width);
+    overflow: hidden;
+    background: var(--surface-color);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: box-shadow 0.5s var(--ease-soft), border-color 0.5s var(--ease-soft);
+}
+
+.project-card:hover,
+.project-card:focus-within {
+    border-color: var(--primary-blue);
+    box-shadow: var(--shadow-strong);
+}
+
+.project-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--lighter-blue);
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s var(--ease-soft);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.06);
+}
+
+.project-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(45, 34, 27, 0.55), transparent 55%);
+    opacity: 0.5;
+    transition: opacity 0.5s var(--ease-soft);
+}
+
+.project-card:hover .project-image::after {
+    opacity: 1;
+}
+
+.project-index {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    z-index: 1;
+    display: grid;
+    width: 2.6rem;
+    height: 2.6rem;
+    place-items: center;
+    color: #fbf7f0;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 700;
+    background: rgba(45, 34, 27, 0.72);
+    border: 1px solid rgba(251, 247, 240, 0.35);
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+}
+
+.project-open-hint {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1;
+    display: inline-flex;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    color: #2d221b;
+    font-size: 0.78rem;
+    font-weight: 500;
+    background: #fbf7f0;
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s var(--ease-soft), transform 0.5s var(--ease-soft);
+}
+
+.project-card:hover .project-open-hint,
+.project-card:focus-within .project-open-hint {
+    opacity: 1;
+    transform: none;
+}
+
+.project-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.3rem 1.4rem 1.4rem;
+}
+
+.project-category {
+    margin-bottom: 0.4rem;
+    color: var(--primary-blue);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.project-name {
+    margin-bottom: 0.5rem;
+    font-size: 1.55rem;
+    line-height: 1.15;
+}
+
+/* The title button covers the whole card, so the card is one big click target */
+.project-open {
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: left;
+}
+
+.project-open::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.project-open:focus-visible {
+    outline: none;
+}
+
+.project-card:has(.project-open:focus-visible) {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 3px;
+}
+
+.project-description {
+    flex: 1;
+    margin-bottom: 1.1rem;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.marquee-hint {
+    margin-top: 0.25rem;
+    color: var(--text-light);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+}
+
+.marquee-hint .star {
+    vertical-align: middle;
+}
+
+/* ================= Project index ================= */
+
+.project-index-wrap {
+    width: min(100%, var(--page-max));
+    margin: 0 auto;
+    padding: clamp(3.5rem, 7vw, 6rem) var(--gutter) 0;
+}
+
+.project-index-list {
+    list-style: none;
+}
+
+.index-row {
+    position: relative;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 3.5rem minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 2rem;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.5rem 0.5rem;
+    color: var(--text-dark);
+    text-align: left;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.5s var(--ease-soft);
+}
+
+.index-row > span:not(.index-arrow) {
+    transition: transform 0.5s var(--ease-soft);
+}
+
+.index-row:hover,
+.index-row:focus-visible {
+    background: linear-gradient(90deg, var(--lighter-blue), transparent 80%);
+}
+
+.index-row:hover > span:not(.index-arrow),
+.index-row:focus-visible > span:not(.index-arrow) {
+    transform: translateX(1rem);
+}
+
+.index-no {
+    color: var(--primary-blue);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.index-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.index-cat,
+.index-stack {
+    color: var(--text-medium);
+    font-size: 0.85rem;
+}
+
+.index-stack {
+    color: var(--text-light);
+}
+
+.index-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.5s var(--ease-soft);
+}
+
+.index-row:hover .index-arrow {
+    transform: translateX(6px) rotate(-45deg);
+}
+
+/* Floating preview image on hover */
+.index-peek {
+    position: absolute;
+    top: 50%;
+    right: 12%;
+    z-index: 2;
+    width: 220px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 4px solid var(--surface-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-strong);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) rotate(4deg) scale(0.9);
+    transition: opacity 0.4s ease, transform 0.6s var(--ease-soft);
+}
+
+.index-row:hover .index-peek {
+    opacity: 1;
+    transform: translateY(-50%) rotate(-3deg) scale(1);
+}
+
+/* ================= Case study dialog ================= */
+
+.case-dialog {
+    width: min(96vw, 1100px);
+    max-width: none;
+    height: min(92vh, 1000px);
+    max-height: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    color: var(--text-dark);
+    background: var(--alice-blue);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-strong);
+}
+
+.case-dialog[open] {
+    display: flex;
+    flex-direction: column;
+    animation: case-in 0.6s var(--ease-soft);
+}
+
+.case-dialog::backdrop {
+    background: rgba(28, 22, 18, 0.6);
+    backdrop-filter: blur(6px);
+}
+
+@keyframes case-in {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+}
+
+.case-bar {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem 1rem 0.8rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+.case-bar-label {
+    color: var(--text-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.case-bar-actions {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.case-nav,
+.case-close {
+    padding: 0.5rem 0.9rem;
+    color: var(--text-dark);
+    font-size: 0.82rem;
+    font-weight: 500;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    transition: background 0.35s var(--ease-soft), color 0.35s var(--ease-soft);
+}
+
+.case-nav:hover {
+    background: var(--lighter-blue);
+}
+
+.case-close {
+    color: var(--white);
+    background: var(--dark-blue);
+    border-color: var(--dark-blue);
+}
+
+.case-close:hover {
+    background: var(--primary-blue);
+}
+
+.case-scroll {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.case {
+    padding: clamp(1.5rem, 4vw, 3rem);
+    animation: case-panel-in 0.7s var(--ease-soft);
+}
+
+@keyframes case-panel-in {
+    from { opacity: 0; transform: translateX(16px); }
+}
+
+.case-head .kicker {
+    margin-bottom: 1rem;
+}
+
+.case-title {
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+}
+
+.case-tagline {
+    max-width: 40rem;
+    margin-top: 1rem;
+    color: var(--text-medium);
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-style: italic;
+}
+
+.case-figure {
+    margin: 2rem 0 2.5rem;
+    padding: 0.6rem;
+    background: var(--surface-color);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+}
+
+.case-figure img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: var(--radius-md);
+}
+
+.case-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+}
+
+.case-main section + section {
+    margin-top: 2rem;
+}
+
+.case-main h3,
+.case-side h3 {
+    margin-bottom: 0.6rem;
+    color: var(--primary-blue);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.case-main p {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.case-main section:first-child p::first-letter {
+    float: left;
+    margin: 0.3rem 0.55rem 0 0;
+    color: var(--primary-blue);
+    font-family: var(--font-display);
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 0.8;
+}
+
+.case-side {
+    align-self: start;
+    padding: 1.5rem;
+    background: var(--surface-color);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+}
+
+.case-meta {
+    margin-bottom: 1.6rem;
+}
+
+.case-meta div {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.case-meta div:first-child {
+    padding-top: 0;
+}
+
+.case-meta dt {
+    margin-bottom: 0.2rem;
+    color: var(--text-light);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.case-meta dd {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+}
+
+.case-meta .project-tags {
+    margin-top: 0.3rem;
+    font-family: var(--font-body);
+}
+
+.case-features {
+    list-style: none;
+}
+
+.case-features li {
+    position: relative;
+    padding: 0.45rem 0 0.45rem 1.4rem;
+    color: var(--text-medium);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.case-features li::before {
+    content: "✦";
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    color: var(--star-color);
+    font-size: 0.7rem;
+}
+
+/* ================= Phone screenshots ================= */
+
+/* Card: show the whole phone upright on a dark mocha backdrop */
+.project-image--device {
+    background:
+        radial-gradient(circle at 25% 15%, rgba(200, 171, 142, 0.3), transparent 50%),
+        radial-gradient(circle at 80% 95%, rgba(139, 106, 82, 0.45), transparent 55%),
+        #3a2a20;
+}
+
+.project-image--device img {
+    width: auto;
+    height: 112%;
+    margin: 6% auto 0;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.45));
+}
+
+.project-card:hover .project-image--device img {
+    transform: translateY(-4%) scale(1.03);
+}
+
+.index-peek--device {
+    width: 120px;
+    aspect-ratio: 9 / 16;
+    object-fit: contain;
+    background: #3a2a20;
+}
+
+/* Case study: three phones side by side */
+.case-gallery {
+    display: grid;
+    margin: 2rem 0 2.5rem;
+    padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 3vw, 2.5rem);
+    background:
+        radial-gradient(circle at 15% 10%, rgba(200, 171, 142, 0.3), transparent 45%),
+        radial-gradient(circle at 85% 95%, rgba(139, 106, 82, 0.45), transparent 50%),
+        #3a2a20;
+    border-radius: var(--radius-lg);
+}
+
+.case-shot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.case-shot img {
+    width: 100%;
+    max-width: 260px;
+    filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.45));
+    transition: transform 0.8s var(--ease-soft);
+}
+
+.case-shot:nth-child(2) img {
+    transform: translateY(-1.25rem);
+}
+
+.case-shot:hover img {
+    transform: translateY(-0.5rem) scale(1.02);
+}
+
+.case-shot:nth-child(2):hover img {
+    transform: translateY(-1.75rem) scale(1.02);
+}
+
+.case-shot figcaption {
+    color: #e8d7c2;
+    font-family: var(--font-display);
+    font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+    font-style: italic;
+    text-align: center;
+}
+
+.case-shot figcaption span {
+    margin-right: 0.3rem;
+    color: #c8ab8e;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-style: normal;
+    letter-spacing: 0.14em;
+}
+
+@media (max-width: 640px) {
+    .case-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .case-shot img {
+        max-width: 240px;
+    }
+
+    .case-shot:nth-child(2) img,
+    .case-shot:nth-child(2):hover img {
+        transform: none;
+    }
+}
+
+/* ================= Typographic cover (project without a screenshot) ================= */
+
+.project-cover {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    color: #fbf7f0;
+    text-align: center;
+    background:
+        radial-gradient(circle at 20% 15%, rgba(200, 171, 142, 0.35), transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(139, 106, 82, 0.5), transparent 50%),
+        #3a2a20;
+    transition: transform 1s var(--ease-soft);
+}
+
+.project-card:hover .project-cover {
+    transform: scale(1.04);
+}
+
+.project-cover-kicker {
+    color: #d9c2a7;
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+}
+
+.project-cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.project-cover-team {
+    padding: 0.25rem 0.75rem;
+    color: #d9c2a7;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(217, 194, 167, 0.4);
+    border-radius: var(--radius-sm);
+}
+
+.project-cover--large {
+    min-height: clamp(240px, 40vw, 420px);
+    border-radius: var(--radius-md);
+}
+
+.project-cover--large .project-cover-title {
+    font-size: clamp(3rem, 9vw, 6.5rem);
+}
+
+/* "Team Leader" tag on the card */
+.project-role {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    padding: 0.3rem 0.7rem;
+    color: #2d221b;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #fbf7f0;
+    border-radius: var(--radius-sm);
+}
+
+/* ================= Team list in the case study ================= */
+
+.case-team {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+}
+
+.case-team-member {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 0.8rem;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    background: var(--surface-color);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+}
+
+.case-team-member.is-me {
+    border-color: var(--primary-blue);
+    box-shadow: var(--shadow-soft);
+}
+
+.case-team-initials {
+    display: grid;
+    grid-row: 1 / 3;
+    width: 2.6rem;
+    height: 2.6rem;
+    place-items: center;
+    color: var(--primary-blue);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-style: italic;
+    font-weight: 700;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+}
+
+.case-team-member.is-me .case-team-initials {
+    color: var(--white);
+    background: var(--dark-blue);
+    border-color: var(--dark-blue);
+}
+
+.case-team-name {
+    color: var(--text-dark);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.case-team-name em {
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+.case-team-role {
+    color: var(--text-light);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+    .case-team {
+        grid-template-columns: 1fr;
+    }
+}
+
+body:has(.case-dialog[open]) {
+    overflow: hidden;
+}
+
+@media (min-width: 769px) {
+    .projects-marquee {
+        --card-gap: 2rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .index-row {
+        grid-template-columns: 2.5rem 1fr 1.5rem;
+        gap: 1rem;
+    }
+
+    .index-cat,
+    .index-stack,
+    .index-peek {
+        display: none;
+    }
+
+    .case-body {
+        grid-template-columns: 1fr;
+    }
+
+    .case-nav span {
+        display: none;
+    }
+}
+
+/* Keep the slide running even when the global reduced-motion rule in
+   style.css shortens other animations (it pauses on hover/focus). */
+@media (prefers-reduced-motion: reduce) {
+    .projects-marquee.is-running .projects-track {
+        animation-duration: var(--marquee-duration) !important;
+        animation-iteration-count: infinite !important;
+    }
+}

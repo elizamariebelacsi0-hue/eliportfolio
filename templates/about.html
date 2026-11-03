@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About · Eliza Marie{% endblock %}
+{% block page_number %}02{% endblock %}
+{% block page_label %}About{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}?v=10">
+<link rel="stylesheet" href="{% static 'dist/assets/about.css' %}?v=9">
+{% endblock %}
+
+{% block content %}
+<section id="about" class="about-page about-screen">
+    <div class="about-container">
+        <div class="about-image-container">
+            <div class="bounce-cards-container" id="bounce-cards-root"
+                 data-photo1="{% get_media_prefix %}2few_shots.jpg"
+                 data-photo2="{% get_media_prefix %}5few_shots.jpg"
+                 data-photo3="{% get_media_prefix %}3few_shots.jpg"
+                 data-photo4="{% get_media_prefix %}4few_shots.jpg"
+                 data-photo5="{% get_media_prefix %}9few_shots.jpg"
+                 data-photo6="{% get_media_prefix %}6few_shots.jpg"
+                 data-photo7="{% get_media_prefix %}7few_shots.jpg"
+                 data-photo8="{% get_media_prefix %}8few_shots.jpg"
+                 data-photo9="{% get_media_prefix %}1few_shots.jpg"
+                 aria-label="Photos of Eliza"></div>
+            <p class="about-photo-note" aria-hidden="true"><em>Hover the photos</em> &mdash; a few favourite frames</p>
+        </div>
+
+        <div class="about-text-content">
+            <p class="kicker"><span class="kicker-no">02</span><span class="kicker-line"></span> The person behind the work</p>
+            <h1 class="greeting">About <span class="name">Me</span><span class="star" aria-hidden="true">✦</span></h1>
+            <p class="description">
+                I&rsquo;m Eliza Marie D. Rosario, a 23-year-old, fourth-year Computer Science student from Biliran.
+                I&rsquo;m currently focused on completing my studies, gaining new experiences,
+                and preparing for my future career, designing websites that look good
+                and feel easy to use.
+            </p>
+
+            <dl class="fact-sheet">
+                <div><dt>Name</dt><dd>Eliza Marie</dd></div>
+                <div><dt>Age</dt><dd>23</dd></div>
+                <div><dt>Studying</dt><dd>Computer Science &middot; 4th year</dd></div>
+                <div><dt>Home</dt><dd>Lower Sitio San Agustin, Brgy. Uson, Caibiran, Biliran</dd></div>
+                <div><dt>Focus</dt><dd>Web design &amp; Front-end</dd></div>
+            </dl>
+
+            <div class="cta-buttons">
+                <a href="{% url 'projects' %}" class="btn btn-primary">View Projects <span aria-hidden="true">&rarr;</span></a>
+                <a href="{% url 'contact' %}" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-values" aria-labelledby="values-title">
+    <div class="about-wrap">
+        <div class="section-label">
+            <h2 id="values-title">What I <em>bring</em></h2>
+            <p>Three things, always</p>
+        </div>
+        <ol class="values-list">
+            <li class="value reveal">
+                <span class="value-no">i.</span>
+                <h3>An eye for detail</h3>
+                <p>I love experimenting with layouts, colors, and type until a page feels calm, clear, and easy to use.</p>
+            </li>
+            <li class="value reveal">
+                <span class="value-no">ii.</span>
+                <h3>Systems that solve problems</h3>
+                <p>From barangay records to chest X-ray classification, I build tools around real needs, not just screens.</p>
+            </li>
+            <li class="value reveal">
+                <span class="value-no">iii.</span>
+                <h3>Always learning</h3>
+                <p>Seminars, micro-credentials, and new frameworks. I keep adding to my toolkit, one project at a time.</p>
+            </li>
+        </ol>
+
+        <blockquote class="pull-quote reveal">
+            <p>&ldquo;A good website should look <em>beautiful</em> and feel <em>effortless</em>.&rdquo;</p>
+            <cite>&mdash; Eliza Marie</cite>
+        </blockquote>
+    </div>
+</section>
+
+<section class="about-journey" aria-labelledby="journey-title">
+    <div class="about-wrap">
+        <div class="section-label">
+            <h2 id="journey-title">The <em>journey</em> so far</h2>
+            <p>Milestones</p>
+        </div>
+        <ol class="timeline">
+            <li class="reveal">
+                <span class="timeline-when">Now</span>
+                <div><h3>Fourth-year Computer Science student</h3><p>Completing my degree and preparing for a career in web design and development.</p></div>
+            </li>
+            <li class="reveal">
+                <span class="timeline-when">Sep 2026</span>
+                <div><h3>Introduction to AI Literacy &amp; Responsible Use</h3><p>Micro-credentials course &middot; Mapúa University &times; CHED ACHIEVE</p></div>
+            </li>
+            <li class="reveal">
+                <span class="timeline-when">May 2026</span>
+                <div><h3>Networking Basics</h3><p>Course credential &middot; Cisco Networking Academy</p></div>
+            </li>
+            <li class="reveal">
+                <span class="timeline-when">Oct 2025</span>
+                <div><h3>Thesis Preparation Seminar-Workshop</h3><p>Trending tools and industry practices &middot; Biliran Province State University</p></div>
+            </li>
+            <li class="reveal">
+                <span class="timeline-when">Built</span>
+                <div><h3>Five projects and counting</h3><p>Fiscal Management System, LungCheck, PayFlow, Serenity Tours, and IntelliGuide, my thesis project. <a class="link-underline" href="{% url 'projects' %}">See the work &rarr;</a></p></div>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section id="more-about" class="more-about-section">
+    <div class="about-wrap">
+        <div class="section-label">
+            <h2>A little <em>more</em> about me</h2>
+            <p>Scrapbook</p>
+        </div>
+        <figure class="more-about-figure reveal">
+            <img class="more-about-image" src="{% get_media_prefix %}more_about_me_fixed.png" alt="More about Eliza" loading="lazy">
+        </figure>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'dist/assets/about.js' %}?v=9"></script>
+{% endblock %}

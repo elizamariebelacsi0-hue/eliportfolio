@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_number %}01{% endblock %}
+{% block page_label %}Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=21">
+<link rel="stylesheet" href="{% static 'dist/assets/home.css' %}?v=9">
+{% endblock %}
+
+{% block content %}
+<section id="home" class="home-page">
+    <div class="home-content">
+        <div class="home-intro-content">
+
+            <h1 class="home-title">
+                <span class="home-title-line"><span class="hello-script">Hi,</span> I'm</span>
+                <span class="home-title-line hello-name">Eliza!<span class="star" aria-hidden="true">✦</span></span>
+            </h1>
+
+            <p class="home-intro-subtitle">Web Designer <em>&amp;</em> Front-End Developer</p>
+
+            <p class="home-intro-copy">
+                I&rsquo;m a fourth-year Computer Science student who genuinely enjoys
+                designing and creating visually appealing websites. I love experimenting
+                with layouts, colors, and styles to make websites look good and feel easy to use.
+            </p>
+
+            <div class="home-actions">
+                <a href="{% url 'projects' %}" class="btn btn-primary">View Projects <span aria-hidden="true">&rarr;</span></a>
+                <a href="{% url 'about' %}" class="btn btn-secondary">About me</a>
+            </div>
+
+            <dl class="home-stats">
+                <div><dt>Projects</dt><dd>{{ project_count|stringformat:"02d" }}</dd></div>
+                <div><dt>Skills</dt><dd>{{ skill_count }}</dd></div>
+                <div><dt>Certificates</dt><dd>{{ certificate_count|stringformat:"02d" }}</dd></div>
+                <div><dt>Year in CS</dt><dd>4<sup>th</sup></dd></div>
+            </dl>
+        </div>
+    </div>
+
+    <div class="spin-badge home-badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+            <defs><path id="home-badge-path" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+            <text><textPath href="#home-badge-path" textLength="236">Web Design ✦ Front-End ✦ Biliran ✦ </textPath></text>
+        </svg>
+        <span class="spin-badge-core">E</span>
+    </div>
+
+    <p class="home-caption" aria-hidden="true"><em>Drag the card</em> &mdash; it swings.</p>
+
+    <div class="lanyard-container" aria-label="Interactive portfolio ID card">
+        <div id="lanyard-root"
+             data-front-image="{% get_media_prefix %}lanyard_pic.jpg"
+             data-back-image="{% get_media_prefix %}lanyard_pic.jpg"></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="{% static 'dist/assets/home.js' %}?v=9"></script>
+{% endblock %}

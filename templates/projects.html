@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects · Eliza Marie{% endblock %}
+{% block page_number %}03{% endblock %}
+{% block page_label %}Projects{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/projects.css' %}?v=14">
+{% endblock %}
+
+{% block content %}
+<section id="projects" class="projects-page">
+    <header class="page-head">
+        <p class="kicker"><span class="kicker-no">03</span><span class="kicker-line"></span> Selected work &middot; {{ projects|length|stringformat:"02d" }} projects</p>
+        <h1 class="page-title">Some of <em>my works</em></h1>
+        <p class="page-lede">Systems and websites I designed and built as a student developer. Click any project to open its full story: the problem, what I built, and the tools behind it.</p>
+    </header>
+
+    <div class="projects-marquee" id="projects-marquee">
+        <div class="projects-track">
+            <div class="projects-set">
+                {% for project in projects %}
+                <article class="project-card">
+                    <div class="project-image{% if project.device_shot %} project-image--device{% endif %}">
+                        {% if project.image %}
+                        <img src="{% get_media_prefix %}{{ project.image }}" alt="{{ project.image_alt }}" loading="lazy">
+                        {% else %}
+                        <div class="project-cover" aria-hidden="true">
+                            <span class="project-cover-kicker">✦ {{ project.category }} ✦</span>
+                            <span class="project-cover-title">{{ project.title }}</span>
+                            {% if project.team %}<span class="project-cover-team">A team of {{ project.team|length }}</span>{% endif %}
+                        </div>
+                        {% endif %}
+                        <span class="project-index" aria-hidden="true">{{ project.number }}</span>
+                        {% if project.role %}<span class="project-role">{{ project.role }}</span>{% endif %}
+                        <span class="project-open-hint" aria-hidden="true">View case study <span>&rarr;</span></span>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-category">{{ project.category }}</p>
+                        <h2 class="project-name">
+                            <button type="button" class="project-open" data-case="{{ project.slug }}" aria-haspopup="dialog">{{ project.title }}</button>
+                        </h2>
+                        <p class="project-description">{{ project.tagline }}</p>
+                        <div class="project-tags">
+                            {% for tool in project.stack %}<span class="project-tag">{{ tool }}</span>{% endfor %}
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <p class="marquee-hint"><span class="star" aria-hidden="true">✦</span> Hover to pause &middot; click a card to open it</p>
+
+    <div class="project-index-wrap">
+        <div class="section-label">
+            <h2>Project <em>index</em></h2>
+            <p>Everything, at a glance</p>
+        </div>
+        <ol class="project-index-list">
+            {% for project in projects %}
+            <li class="reveal">
+                <button type="button" class="index-row" data-case="{{ project.slug }}" aria-haspopup="dialog">
+                    <span class="index-no">{{ project.number }}</span>
+                    <span class="index-title">{{ project.title }}</span>
+                    <span class="index-cat">{{ project.category }}</span>
+                    <span class="index-stack">{{ project.stack|join:" · " }}</span>
+                    <span class="index-arrow" aria-hidden="true">&rarr;</span>
+                    {% if project.image %}<img class="index-peek{% if project.device_shot %} index-peek--device{% endif %}" src="{% get_media_prefix %}{{ project.image }}" alt="" loading="lazy">{% endif %}
+                </button>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</section>
+
+<dialog class="case-dialog" id="case-dialog" aria-labelledby="case-dialog-title">
+    <div class="case-bar">
+        <p class="case-bar-label" id="case-dialog-title">Case study</p>
+        <div class="case-bar-actions">
+            <button type="button" class="case-nav" data-step="-1" aria-label="Previous project">&larr; <span>Prev</span></button>
+            <button type="button" class="case-nav" data-step="1" aria-label="Next project"><span>Next</span> &rarr;</button>
+            <form method="dialog"><button class="case-close" aria-label="Close case study">Close &times;</button></form>
+        </div>
+    </div>
+
+    <div class="case-scroll">
+        {% for project in projects %}
+        <article class="case" id="case-{{ project.slug }}" data-case-panel="{{ project.slug }}" hidden>
+            <header class="case-head">
+                <p class="kicker"><span class="kicker-no">{{ project.number }}</span><span class="kicker-line"></span> {{ project.category }}</p>
+                <h2 class="case-title">{{ project.title }}</h2>
+                <p class="case-tagline">{{ project.tagline }}</p>
+            </header>
+
+            {% if project.gallery %}
+            <div class="case-gallery">
+                {% for shot in project.gallery %}
+                <figure class="case-shot">
+                    <img src="{% get_media_prefix %}{{ shot.image }}" alt="{{ shot.alt }}" loading="lazy">
+                    <figcaption><span>{{ forloop.counter|stringformat:"02d" }}</span> {{ shot.caption }}</figcaption>
+                </figure>
+                {% endfor %}
+            </div>
+            {% else %}
+            <figure class="case-figure">
+                {% if project.image %}
+                <img src="{% get_media_prefix %}{{ project.image }}" alt="{{ project.image_alt }}" loading="lazy">
+                {% else %}
+                <div class="project-cover project-cover--large" aria-hidden="true">
+                    <span class="project-cover-kicker">✦ {{ project.category }} ✦</span>
+                    <span class="project-cover-title">{{ project.title }}</span>
+                    {% if project.team %}<span class="project-cover-team">A team of {{ project.team|length }}</span>{% endif %}
+                </div>
+                {% endif %}
+            </figure>
+            {% endif %}
+
+            <div class="case-body">
+                <div class="case-main">
+                    <section>
+                        <h3>Overview</h3>
+                        <p>{{ project.summary }}</p>
+                    </section>
+                    {% if project.challenge %}
+                    <section>
+                        <h3>The challenge</h3>
+                        <p>{{ project.challenge }}</p>
+                    </section>
+                    {% endif %}
+                    {% if project.solution %}
+                    <section>
+                        <h3>What I built</h3>
+                        <p>{{ project.solution }}</p>
+                    </section>
+                    {% endif %}
+                    {% if project.team %}
+                    <section>
+                        <h3>The team</h3>
+                        <ul class="case-team">
+                            {% for member in project.team %}
+                            <li class="case-team-member{% if member.is_me %} is-me{% endif %}">
+                                <span class="case-team-initials" aria-hidden="true">{{ member.name|slice:":1" }}</span>
+                                <span class="case-team-name">{{ member.name }}{% if member.is_me %} <em>(me)</em>{% endif %}</span>
+                                <span class="case-team-role">{{ member.role }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                    {% endif %}
+                </div>
+
+                <aside class="case-side">
+                    <dl class="case-meta">
+                        <div><dt>Context</dt><dd>{{ project.context }}</dd></div>
+                        {% if project.platform %}<div><dt>Platform</dt><dd>{{ project.platform }}</dd></div>{% endif %}
+                        {% if project.role %}<div><dt>My role</dt><dd>{{ project.role }}</dd></div>{% endif %}
+                        <div><dt>Type</dt><dd>{{ project.category }}</dd></div>
+                        <div><dt>Built with</dt><dd><span class="project-tags">{% for tool in project.stack %}<span class="project-tag">{{ tool }}</span>{% endfor %}</span></dd></div>
+                    </dl>
+                    {% if project.features %}
+                    <h3>Key features</h3>
+                    <ul class="case-features">
+                        {% for feature in project.features %}<li>{{ feature }}</li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                </aside>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</dialog>
+{% endblock %}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="32" fill="#4b382c"/>
+  <text x="29" y="45" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700" fill="#fbf7f0">E</text>
+  <circle cx="45.5" cy="42.5" r="3.6" fill="#c8ab8e"/>
+</svg>

@@ -1,0 +1,78 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Eliza Marie · Web Designer & Front-End Developer{% endblock %}</title>
+    <meta name="description" content="Portfolio of Eliza Marie, a Computer Science student and web designer from Naval, Biliran.">
+    <link rel="icon" href="{% static 'images/favicon.svg' %}?v=1" type="image/svg+xml">
+    <link rel="icon" href="{% static 'images/favicon-32.png' %}?v=1" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}?v=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,500;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=16">
+    {% block extra_css %}{% endblock %}
+    <script>
+        document.documentElement.classList.add('js');
+        try {
+            if (localStorage.getItem('portfolio-theme') === 'dark') {
+                document.documentElement.dataset.theme = 'dark';
+            }
+        } catch {}
+    </script>
+</head>
+<body>
+    <header class="masthead">
+        <a class="brand" href="{% url 'home' %}" aria-label="Eliza Marie, home">
+            <span class="brand-mark" aria-hidden="true">E<i>.</i></span>
+            <span class="brand-name">Eliza Marie<small>Portfolio &middot;</small></span>
+        </a>
+        <span class="masthead-page" aria-hidden="true">{% block page_label %}{% endblock %}</span>
+    </header>
+
+    <nav class="navbar" aria-label="Main">
+        <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+            <svg class="theme-toggle-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <g class="theme-icon-moon">
+                    <path d="M20.2 15.1A8.3 8.3 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"/>
+                    <path d="M16.8 3.4v3.2M15.2 5h3.2M20.2 8.2v2.2M19.1 9.3h2.2"/>
+                </g>
+                <g class="theme-icon-sun">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>
+                </g>
+            </svg>
+        </button>
+        <div class="nav-links">
+            <a href="{% url 'home' %}" class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}" data-label="Home" aria-label="Home"{% if request.resolver_match.url_name == 'home' %} aria-current="page"{% endif %}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/></svg></a>
+            <a href="{% url 'about' %}" class="nav-link{% if request.resolver_match.url_name == 'about' %} active{% endif %}" data-label="About" aria-label="About"{% if request.resolver_match.url_name == 'about' %} aria-current="page"{% endif %}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.8-3.8 3.7-6 7.5-6s6.7 2.2 7.5 6"/></svg></a>
+            <a href="{% url 'projects' %}" class="nav-link{% if request.resolver_match.url_name == 'projects' %} active{% endif %}" data-label="Projects" aria-label="Projects"{% if request.resolver_match.url_name == 'projects' %} aria-current="page"{% endif %}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/><path d="M3 13h18"/></svg></a>
+            <a href="{% url 'skills' %}" class="nav-link{% if request.resolver_match.url_name == 'skills' %} active{% endif %}" data-label="Skills" aria-label="Skills"{% if request.resolver_match.url_name == 'skills' %} aria-current="page"{% endif %}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m8.5 8-4.5 4 4.5 4"/><path d="m15.5 8 4.5 4-4.5 4"/><path d="m13.5 5.5-3 13"/></svg></a>
+            <a href="{% url 'certificates' %}" class="nav-link{% if request.resolver_match.url_name == 'certificates' %} active{% endif %}" data-label="Certificates" aria-label="Certificates"{% if request.resolver_match.url_name == 'certificates' %} aria-current="page"{% endif %}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="9" r="5.5"/><path d="m9 13.8-1.6 6.2 4.6-2.4 4.6 2.4-1.6-6.2"/><path d="m10 9 1.4 1.4L14.2 7.6"/></svg></a>
+            <a href="{% url 'contact' %}" class="nav-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}" data-label="Contact" aria-label="Contact"{% if request.resolver_match.url_name == 'contact' %} aria-current="page"{% endif %}><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.5 7.5 8.5 6 8.5-6"/></svg></a>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="colophon">
+        {% block colophon_cta %}
+        <div class="colophon-cta">
+            <p class="kicker"><span class="kicker-no">&rarr;</span> Next chapter</p>
+            <p class="colophon-title">Have an idea? Let's make something <em>lovely</em> together.</p>
+            <a class="btn btn-primary" href="{% url 'contact' %}">Get in touch <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        {% endblock %}
+        <div class="colophon-base">
+            <span>&copy; 2026 Eliza Marie</span>
+            <a href="#main-content" class="link-underline">Back to top &uarr;</a>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}?v=13"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

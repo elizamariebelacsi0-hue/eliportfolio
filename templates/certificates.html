@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Certificates · Eliza Marie{% endblock %}
+{% block page_number %}05{% endblock %}
+{% block page_label %}Certificates{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/certificates.css' %}?v=16">
+{% endblock %}
+
+{% block content %}
+<section id="certificates" class="certificates-page">
+    <header class="page-head">
+        <p class="kicker"><span class="kicker-no">05</span><span class="kicker-line"></span> Learning &amp; recognition</p>
+        <h1 class="page-title">Certifi&shy;<em>cates</em></h1>
+        <p class="page-lede">Seminars and micro-credentials I have completed along the way. Click a certificate to see it full size.</p>
+    </header>
+
+    <div class="certificates-grid">
+        <article class="certificate-card reveal">
+            <button type="button" class="certificate-frame" data-lightbox
+                    data-src="{% get_media_prefix %}cert-thesis-workshop.jpg"
+                    data-title="Thesis Preparation with the Use of Trending Tools and Industry Practices"
+                    aria-label="View certificate: Thesis Preparation Seminar-Workshop">
+                <img src="{% get_media_prefix %}cert-thesis-workshop.jpg"
+                     alt="Certificate of Completion from Biliran Province State University for the Seminar-Workshop on Thesis Preparation"
+                     width="1437" height="828" loading="lazy">
+                <span class="certificate-zoom" aria-hidden="true">View full size &nearr;</span>
+            </button>
+            <div class="certificate-body">
+                <div class="certificate-meta">
+                    <span class="certificate-no">No. 01</span>
+                    <span class="certificate-date">October 6&ndash;7, 2025</span>
+                </div>
+                <h2 class="certificate-title">Thesis Preparation with the Use of Trending Tools and Industry Practices</h2>
+                <p class="certificate-issuer">Seminar-Workshop &middot; Biliran Province State University</p>
+                <div class="project-tags">
+                    <span class="project-tag">Seminar-Workshop</span>
+                    <span class="project-tag">Research</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="certificate-card reveal">
+            <button type="button" class="certificate-frame" data-lightbox
+                    data-src="{% get_media_prefix %}cert-ai-literacy.jpg"
+                    data-title="Introduction to AI Literacy and Responsible Use"
+                    aria-label="View certificate: Introduction to AI Literacy and Responsible Use">
+                <img src="{% get_media_prefix %}cert-ai-literacy.jpg"
+                     alt="Certificate of Completion from Mapúa University for the micro-credentials course Introduction to AI Literacy and Responsible Use"
+                     width="1116" height="793" loading="lazy">
+                <span class="certificate-zoom" aria-hidden="true">View full size &nearr;</span>
+            </button>
+            <div class="certificate-body">
+                <div class="certificate-meta">
+                    <span class="certificate-no">No. 02</span>
+                    <span class="certificate-date">September 14, 2026</span>
+                </div>
+                <h2 class="certificate-title">Introduction to AI Literacy and Responsible Use</h2>
+                <p class="certificate-issuer">Micro-credentials course &middot; Mapúa University &times; CHED ACHIEVE</p>
+                <div class="project-tags">
+                    <span class="project-tag">Micro-credential</span>
+                    <span class="project-tag">AI Literacy</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="certificate-card reveal">
+            <button type="button" class="certificate-frame" data-lightbox
+                    data-src="{% get_media_prefix %}cert-cisco-networking-basics.jpg"
+                    data-title="Networking Basics · Certificate of Course Completion"
+                    aria-label="View certificate: Networking Basics, Certificate of Course Completion">
+                <img src="{% get_media_prefix %}cert-cisco-networking-basics.jpg"
+                     alt="Cisco Networking Academy Certificate of Course Completion awarded to Eliza Marie Rosario for the Networking Basics course, issued May 9, 2026"
+                     width="1146" height="880" loading="lazy">
+                <span class="certificate-zoom" aria-hidden="true">View full size &nearr;</span>
+            </button>
+            <div class="certificate-body">
+                <div class="certificate-meta">
+                    <span class="certificate-no">No. 03</span>
+                    <span class="certificate-date">May 9, 2026</span>
+                </div>
+                <h2 class="certificate-title">Networking Basics</h2>
+                <p class="certificate-issuer">Course credential &middot; Cisco Networking Academy</p>
+                <div class="project-tags">
+                    <span class="project-tag">Networking</span>
+                    <span class="project-tag">Cisco</span>
+                    <span class="project-tag">Verified badge</span>
+                </div>
+                <button type="button" class="certificate-extra" data-lightbox
+                        data-src="{% get_media_prefix %}cert-cisco-networking-basics-award.jpg"
+                        data-title="Networking Basics · Certificate of Completion">
+                    <img src="{% get_media_prefix %}cert-cisco-networking-basics-award.jpg"
+                         alt="Cisco Networking Academy certificate awarded to Eliza Marie Rosario for successfully completing Networking Basics, completed 09 May 2026"
+                         width="1153" height="768" loading="lazy">
+                    <span><small>Also awarded</small>Certificate of Completion <span aria-hidden="true">&nearr;</span></span>
+                </button>
+            </div>
+        </article>
+    </div>
+</section>
+
+<dialog class="lightbox" id="certificate-lightbox" aria-label="Certificate preview">
+    <form method="dialog" class="lightbox-bar">
+        <p class="lightbox-title" id="lightbox-title"></p>
+        <button class="lightbox-close" aria-label="Close preview">Close <span aria-hidden="true">&times;</span></button>
+    </form>
+    <img class="lightbox-image" id="lightbox-image" alt="">
+</dialog>
+{% endblock %}

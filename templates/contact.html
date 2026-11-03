@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact · Eliza Marie{% endblock %}
+{% block page_number %}06{% endblock %}
+{% block page_label %}Contact{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}?v=13">
+{% endblock %}
+
+{% block content %}
+<section id="contact" class="contact-page">
+    <div class="contact-content">
+        <div class="contact-info">
+            <p class="kicker"><span class="kicker-no">06</span><span class="kicker-line"></span> Say hello</p>
+            <h1 class="contact-title">Let's <em>connect<span class="star" aria-hidden="true">✦</span></em></h1>
+            <p class="contact-lede">Feel free to reach out for collaborations, opportunities, or just a friendly hello. I&rsquo;d love to hear from you.</p>
+
+            <div class="contact-aside">
+                <div class="spin-badge" aria-hidden="true">
+                    <svg viewBox="0 0 100 100">
+                        <defs><path id="contact-badge-path" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+                        <text><textPath href="#contact-badge-path" textLength="236">Say hello ✦ Say hello ✦ Say hello ✦ </textPath></text>
+                    </svg>
+                    <span class="spin-badge-core">&rarr;</span>
+                </div>
+                <div class="local-time">
+                    <span class="local-time-label">Local time in Biliran</span>
+                    <span class="local-time-value" id="local-time">--:--</span>
+                    <span class="local-time-zone">Philippines &middot; GMT+8</span>
+                </div>
+            </div>
+        </div>
+
+        <ul class="contact-links">
+            <li>
+                <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=elxxbel@gmail.com" class="contact-link" target="_blank" rel="noopener">
+                    <span class="contact-no">01</span>
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">elxxbel@gmail.com</span>
+                    <span class="contact-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+            <li>
+                <div class="contact-link">
+                    <span class="contact-no">02</span>
+                    <span class="contact-label">Phone</span>
+                    <span class="contact-value">09260726050</span>
+                </div>
+            </li>
+            <li>
+                <a href="https://wa.me/639260726050" class="contact-link" target="_blank" rel="noopener">
+                    <span class="contact-no">03</span>
+                    <span class="contact-label">WhatsApp</span>
+                    <span class="contact-value">09260726050 &middot; @zaiesi</span>
+                    <span class="contact-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+            <li>
+                {% if facebook_url %}
+                <a href="{{ facebook_url }}" class="contact-link" target="_blank" rel="noopener">
+                    <span class="contact-no">04</span>
+                    <span class="contact-label">Facebook</span>
+                    <span class="contact-value">Eli Belacsi</span>
+                    <span class="contact-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                {% else %}
+                <div class="contact-link">
+                    <span class="contact-no">04</span>
+                    <span class="contact-label">Facebook</span>
+                    <span class="contact-value">Eli Marie</span>
+                </div>
+                {% endif %}
+            </li>
+            <li>
+                {% if github_url %}
+                <a href="{{ github_url }}" class="contact-link" target="_blank" rel="noopener">
+                    <span class="contact-no">05</span>
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">GitHub</span>
+                    <span class="contact-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                {% else %}
+                <div class="contact-link">
+                    <span class="contact-no">05</span>
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">GitHub</span>
+                </div>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</section>
+{% endblock %}
+
+{% block colophon_cta %}{% endblock %}
