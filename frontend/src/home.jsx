@@ -16,7 +16,7 @@ if (root) {
       cornerRadius={0.3}
       size={0.6}
       anchor="right"
-      strapLength={0.5}
+      strapLength={0.32}
       strapColor="#111111"
       strapWidth={0.65}
       metal="silver"
