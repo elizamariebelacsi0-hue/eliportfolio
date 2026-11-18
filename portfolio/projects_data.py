@@ -6,7 +6,7 @@ when the card is clicked. Images live in media/.
 
 # The tools used across all projects. Edit here to change every project at once,
 # or give a single project its own list instead of STACK.
-STACK = ['Python', 'Django', 'JavaScript', 'HTML', 'Dataset', 'SQLite']
+STACK = ['Python', 'Django', 'JavaScript', 'HTML', 'SQLite']
 
 # Shown as "Context" in each case study.
 CONTEXT = 'School Project'
@@ -68,7 +68,7 @@ PROJECTS = [
             'Convolutional Neural Network model',
             'Web interface built with Django',
         ],
-        'stack': STACK,
+        'stack': STACK + ['Dataset'],
     },
     {
         'slug': 'payflow',
@@ -182,7 +182,7 @@ PROJECTS = [
             'Location history kept on the phone only',
             'English, Tagalog and Bisaya support',
         ],
-        'stack': ['Flutter', 'Dart', 'TensorFlow Lite', 'YOLOv8 Nano', 'CNN + ViT', 'Hive'],
+        'stack': ['Flutter', 'Dart', 'TensorFlow Lite', 'YOLOv8 Nano', 'CNN + ViT', 'Hive', 'Dataset'],
         'role': 'Team Leader',
         'team': [
             {'name': 'Eliza Marie Rosario', 'role': 'Team Leader', 'is_me': True},
