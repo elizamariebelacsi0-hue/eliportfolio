@@ -26,6 +26,7 @@ SKILL_GROUPS = [
             {'name': 'Python', 'icon': 'python', 'role': 'Logic & machine learning', 'brand': '#3776ab'},
             {'name': 'Django', 'icon': 'django', 'role': 'Web framework', 'brand': '#44b78b'},
             {'name': 'SQL', 'icon': 'sql', 'role': 'Queries & data', 'brand': '#2f80c4'},
+            {'name': 'Java', 'icon': 'java', 'role': 'Programming language', 'brand': '#5382a1'},
             {'name': 'PostgreSQL', 'icon': 'postgresql', 'role': 'Relational database', 'brand': '#336791'},
             {'name': 'Firebase', 'icon': 'firebase', 'role': 'Auth & hosting', 'brand': '#ffa000'},
         ],

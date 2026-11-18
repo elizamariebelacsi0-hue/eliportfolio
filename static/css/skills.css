@@ -368,6 +368,10 @@
     list-style: none;
 }
 
+.skill-group[data-group="backend"] .skill-list {
+    grid-template-columns: 1fr;
+}
+
 .skill-tile {
     position: relative;
     display: flex;
