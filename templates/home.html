@@ -5,7 +5,7 @@
 {% block page_label %}Home{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}?v=21">
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=22">
 {% endblock %}
 
 {% block content %}
@@ -38,6 +38,10 @@
                 <div><dt>Year in CS</dt><dd>4<sup>th</sup></dd></div>
             </dl>
         </div>
+
+        <div class="home-photo-frame">
+            <img src="{% get_media_prefix %}lanyard_pic.jpg" alt="Eliza" class="home-photo">
+        </div>
     </div>
 
     <div class="spin-badge home-badge" aria-hidden="true">
@@ -48,9 +52,6 @@
         <span class="spin-badge-core">E</span>
     </div>
 
-    <div class="home-photo-frame">
-        <img src="{% get_media_prefix %}lanyard_pic.jpg" alt="Eliza" class="home-photo">
-    </div>
 </section>
 {% endblock %}
 
