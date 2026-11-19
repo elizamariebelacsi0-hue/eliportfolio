@@ -11,7 +11,6 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       input: {
-        home: fileURLToPath(new URL('./frontend/src/home.jsx', import.meta.url)),
         about: fileURLToPath(new URL('./frontend/src/about.jsx', import.meta.url))
       },
       output: {

@@ -154,38 +154,25 @@
     z-index: 0;
 }
 
-.home-caption {
-    position: absolute;
-    right: var(--gutter);
-    bottom: 7rem;
-    /* Behind the swinging ID card, like the badge */
-    z-index: 0;
-    color: var(--text-light);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-}
-
-.home-caption em {
-    color: var(--primary-blue);
-    font-family: var(--font-display);
-    font-size: 1rem;
-}
-
-.lanyard-container {
+.home-photo-frame {
     position: absolute;
     z-index: 1;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    perspective: 900px;
-    pointer-events: none;
-    touch-action: none;
+    top: 50%;
+    right: clamp(2rem, 10vw, 9rem);
+    width: clamp(240px, 28vw, 380px);
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 10px solid var(--surface, #fff);
+    border-radius: 0;
+    box-shadow: 0 22px 60px rgb(34 49 68 / 18%);
+    transform: translateY(-50%);
 }
 
-#lanyard-root {
+.home-photo {
+    display: block;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    object-fit: cover;
 }
 
 @keyframes rise-in {
@@ -241,7 +228,12 @@
         border-left: 0;
     }
 
-    .home-caption {
-        display: none;
+    .home-photo-frame {
+        top: auto;
+        right: 1.25rem;
+        bottom: 1.5rem;
+        width: clamp(120px, 32vw, 190px);
+        border-width: 6px;
+        transform: none;
     }
 }

@@ -6,7 +6,6 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}?v=21">
-<link rel="stylesheet" href="{% static 'dist/assets/home.css' %}?v=9">
 {% endblock %}
 
 {% block content %}
@@ -49,16 +48,9 @@
         <span class="spin-badge-core">E</span>
     </div>
 
-    <p class="home-caption" aria-hidden="true"><em>Drag the card</em> &mdash; it swings.</p>
-
-    <div class="lanyard-container" aria-label="Interactive portfolio ID card">
-        <div id="lanyard-root"
-             data-front-image="{% get_media_prefix %}lanyard_pic.jpg"
-             data-back-image="{% get_media_prefix %}lanyard_pic.jpg"></div>
+    <div class="home-photo-frame">
+        <img src="{% get_media_prefix %}lanyard_pic.jpg" alt="Eliza" class="home-photo">
     </div>
 </section>
 {% endblock %}
 
-{% block extra_js %}
-<script type="module" src="{% static 'dist/assets/home.js' %}?v=10"></script>
-{% endblock %}
